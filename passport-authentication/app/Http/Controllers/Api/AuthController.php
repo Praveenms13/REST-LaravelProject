@@ -22,25 +22,12 @@ class AuthController extends Controller
 
         $userData['email_verified_at'] = now();
         $user = User::create($userData);
-
-        // Preventing Logging in once registered
-        // $response = Http::post(env('APP_URL') . '/oauth/token', [
-        //     'grant_type' => 'password',
-        //     'client_id' => env('PASSPORT_PASSWORD_CLIENT_ID'),
-        //     'client_secret' => env('PASSPORT_PASSWORD_SECRET'),
-        //     'username' => $userData['email'],
-        //     'password' => $userData['password'],
-        //     'scope' => '',
-        // ]);
-        // $user['token'] = $response->json();
-        // Preventing Logging in once registered - END
-
         return response()->json([
             'success' => true,
             'statusCode' => 201,
             'Version' => 'API Version 1',
             'message' => 'User has been registered successfully.',
-            //'data' => $user,
+            'data' => $user,
             'data' => [
                 'id' => $user->id,
                 'name' => $user->name,
